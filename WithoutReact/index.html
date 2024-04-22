@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Todo App</title>
+    <script>
+        let globalId = 0;
+
+        function markAsDone(todoId) {
+            const parent = document.getElementById(todoId);
+            parent.children[2].innerHTML = "Done!"; // Set the innerHTML of the third child element of the parent to "Done!"
+        }
+
+        function deleteTodo(todoId) {
+            const parent = document.getElementById("todos");
+            const child = document.getElementById(todoId);
+            parent.removeChild(child); // Remove the child element from the parent element
+        }
+        function editTodo(todoId) {
+            const parent = document.getElementById(todoId);
+            const title = parent.children[0].innerHTML;
+            const description = parent.children[1].innerHTML;
+            const newTitle = prompt("Enter new title", title);
+            const newDescription = prompt("Enter new description", description);
+            parent.children[0].innerHTML = newTitle;
+            parent.children[1].innerHTML = newDescription;
+        }
+
+        function createChild(title, description, id) {
+            const child = document.createElement("div"); // Create a new <div> element
+            const firstGrandParent = document.createElement("div"); // Create a new <div> element
+            firstGrandParent.innerHTML = title; // Set the innerHTML of the first grandparent element to the provided title
+            const secondGrandParent = document.createElement("div"); // Create a new <div> element
+            secondGrandParent.innerHTML = description; // Set the innerHTML of the second grandparent element to the provided description
+            const thirdGrandParent = document.createElement("button"); // Create a new <button> element
+            const fourthGrandParent = document.createElement("button"); // Create a new <button> element
+            const fifthGrandParent = document.createElement("button"); // Create a new <button> element
+            thirdGrandParent.innerHTML = "Mark as done"; // Set the innerHTML of the third grandparent element to "Mark as done"
+            fourthGrandParent.innerHTML = "Delete todo"; // Set the innerHTML of the fourth grandparent element to "Delete todo"
+            fifthGrandParent.innerHTML = "Edit todo"; // Set the innerHTML of the fifth grandparent element to "Edit todo"
+            thirdGrandParent.setAttribute("onclick", `markAsDone(${id})`); // Set the onclick attribute of the third grandparent element to call the markAsDone function with the provided id
+            fourthGrandParent.setAttribute("onclick", `deleteTodo(${id})`); // Set the onclick attribute of the fourth grandparent element to call the deleteTodo function with the provided id
+            fifthGrandParent.setAttribute("onclick", `editTodo(${id})`); // Set the onclick attribute of the fifth grandparent element to call the editTodo function with the provided id
+            child.appendChild(firstGrandParent); // Append the first grandparent element as a child of the child element
+            child.appendChild(secondGrandParent); // Append the second grandparent element as a child of the child element
+            child.appendChild(thirdGrandParent); // Append the third grandparent element as a child of the child element
+            child.appendChild(fourthGrandParent); // Append the fourth grandparent element as a child of the child element
+            child.appendChild(fifthGrandParent); // Append the fifth grandparent element as a child of the child element
+            child.setAttribute("id", id); // Set the id attribute of the child element to the provided id
+            return child; // Return the created child element
+        }
+        function addTodo() {
+            const title = document.getElementById("title").value;
+            const description = document.getElementById("description").value;
+            const parent = document.getElementById("todos");
+
+            parent.appendChild(createChild(title, description, globalId++));
+            document.getElementById("title").value = "";
+            document.getElementById("description").value = "";
+        }
+    </script>
+    <style>
+        div {
+            margin: 10px;
+        }
+
+        button {
+            margin: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <input type="text" id="title" placeholder="Todo title"></input> <br /><br />
+    <input type="text" id="description" placeholder="Todo description"></input> <br /><br />
+    <button onclick="addTodo()">Add todo</button>
+
+    <div id="todos">
+
+    </div>
+</body>
+
+</html>
