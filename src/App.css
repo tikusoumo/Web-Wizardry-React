@@ -1,0 +1,13 @@
+@media (max-width: 600px) {
+    body {
+      font-size: 0.8em;
+    }
+  
+    button {
+      padding: 5px;
+    }
+  
+    input {
+      padding: 5px;
+    }
+  }

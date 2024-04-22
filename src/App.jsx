@@ -54,6 +54,8 @@ function App() {
         backgroundColor: "#f2f2f2",
         padding: "20px",
         borderRadius: "8px",
+        width: "90%",
+        maxWidth: "500px",
       }}
     >
       <h1 style={{ textAlign: "center", color: "black" }}>Todo App</h1>
@@ -96,50 +98,78 @@ function App() {
       >
         Add Todo
       </button>
-      <ul>
+      <ul style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
         {todos.map((todo, index) => (
-          <li key={index} style={{ marginBottom: "10px" }}>
+          <li
+            key={index}
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              flexWrap: "wrap",
+              padding: "10px",
+              border: "1px solid #ddd",
+              borderRadius: "5px",
+            }}
+          >
             <span
               style={{
                 textDecoration: todo.done ? "line-through" : "none",
                 color: "black",
+                flex: "1 1 auto",
+             
               }}
             >
-              {todo.title} - {todo.description}
+              <b>{todo.title}</b> <br/> {todo.description}
             </span>
-            <button
-              onClick={() => handleToggleDone(index)}
-              style={{
-                marginLeft: "10px",
-                padding: "5px",
-                backgroundColor: todo.done ? "#f44336" : "#4CAF50",
-                color: "black",
-                border: "none",
-                cursor: "pointer",
-                borderRadius: "5px",
-              }}
-            >
-              {todo.done ? "Mark as Undone" : "Mark as Done"}
-            </button>
-            <button onClick={() => handleEditTodo(index)} style={{margin: "1rem"}}>Edit</button>
-            {editTodo !== null ? (
-              ""
-            ) : (
+            <div style={{ display: "flex", gap: "10px" }}>
               <button
-                onClick={() => handleDeleteTodo(index)}
+                onClick={() => handleToggleDone(index)}
                 style={{
                   marginLeft: "10px",
                   padding: "5px",
-                  backgroundColor: "#f44336",
+                  backgroundColor: todo.done ? "#f44336" : "#4CAF50",
                   color: "black",
                   border: "none",
                   cursor: "pointer",
                   borderRadius: "5px",
                 }}
               >
-                Delete
+                {todo.done ? "Mark as Undone" : "Mark as Done"}
               </button>
-            )}
+              <button
+                onClick={() => handleEditTodo(index)}
+                style={{
+                  marginLeft: "10px",
+                  padding: "5px",
+                  backgroundColor: "gray",
+                  color: "black",
+                  border: "none",
+                  cursor: "pointer",
+                  borderRadius: "5px",
+                }}
+              >
+                Edit
+              </button>
+              {editTodo !== null ? (
+                ""
+              ) : (
+                <button
+                  onClick={() => handleDeleteTodo(index)}
+                  style={{
+                    marginLeft: "10px",
+                    padding: "5px",
+                    backgroundColor: "#f44336",
+                    color: "black",
+                    border: "none",
+                    cursor: "pointer",
+                    borderRadius: "5px",
+                  }}
+                >
+                  Delete
+                </button>
+              )}
+            </div>
           </li>
         ))}
       </ul>
