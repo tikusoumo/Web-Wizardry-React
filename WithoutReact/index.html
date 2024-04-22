@@ -3,6 +3,26 @@
 
 <head>
     <title>Todo App</title>
+   
+    <style>
+        div {
+            margin: 10px;
+        }
+
+        button {
+            margin: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <input type="text" id="title" placeholder="Todo title"></input> <br /><br />
+    <input type="text" id="description" placeholder="Todo description"></input> <br /><br />
+    <button onclick="addTodo()">Add todo</button>
+
+    <div id="todos">
+
+    </div>
     <script>
         let globalId = 0;
 
@@ -59,25 +79,6 @@
             document.getElementById("description").value = "";
         }
     </script>
-    <style>
-        div {
-            margin: 10px;
-        }
-
-        button {
-            margin: 10px;
-        }
-    </style>
-</head>
-
-<body>
-    <input type="text" id="title" placeholder="Todo title"></input> <br /><br />
-    <input type="text" id="description" placeholder="Todo description"></input> <br /><br />
-    <button onclick="addTodo()">Add todo</button>
-
-    <div id="todos">
-
-    </div>
 </body>
 
 </html>
