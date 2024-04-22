@@ -24,10 +24,10 @@ function App() {
     const newTodos = [...todos];
     newTodos[editTodo] = { title, description, done: todos[editTodo].done };
     setTodos(newTodos);
-    setTitle('');
-    setDescription('');
+    setTitle("");
+    setDescription("");
     setEditTodo(null);
-};
+  };
   const handleDeleteTodo = (index) => {
     const updatedTodos = todos.filter((_, i) => i !== index);
     setTodos(updatedTodos);
@@ -41,7 +41,7 @@ function App() {
     setEditTodo(index);
     setTitle(todos[index].title);
     setDescription(todos[index].description);
-};
+  };
 
   return (
     <div
@@ -56,20 +56,30 @@ function App() {
         borderRadius: "8px",
       }}
     >
-      <h1 style={{ textAlign: "center",color:"black"}}>Todo App</h1>
+      <h1 style={{ textAlign: "center", color: "black" }}>Todo App</h1>
       <input
         type="text"
         placeholder="Title"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
-        style={{ marginBottom: "10px", padding: "5px", width: "100%",borderRadius:"5px" }}
+        style={{
+          marginBottom: "10px",
+          padding: "5px",
+          width: "100%",
+          borderRadius: "5px",
+        }}
       />
       <input
         type="text"
         placeholder="Description"
         value={description}
         onChange={(e) => setDescription(e.target.value)}
-        style={{ marginBottom: "10px", padding: "5px", width: "100%",   borderRadius:"5px" }}
+        style={{
+          marginBottom: "10px",
+          padding: "5px",
+          width: "100%",
+          borderRadius: "5px",
+        }}
       />
 
       <button
@@ -81,7 +91,7 @@ function App() {
           color: "black",
           border: "none",
           cursor: "pointer",
-          borderRadius:"5px"
+          borderRadius: "5px",
         }}
       >
         Add Todo
@@ -90,7 +100,10 @@ function App() {
         {todos.map((todo, index) => (
           <li key={index} style={{ marginBottom: "10px" }}>
             <span
-              style={{ textDecoration: todo.done ? "line-through" : "none",color:"black"}}
+              style={{
+                textDecoration: todo.done ? "line-through" : "none",
+                color: "black",
+              }}
             >
               {todo.title} - {todo.description}
             </span>
@@ -103,34 +116,34 @@ function App() {
                 color: "black",
                 border: "none",
                 cursor: "pointer",
-                borderRadius:"5px"
+                borderRadius: "5px",
               }}
             >
               {todo.done ? "Mark as Undone" : "Mark as Done"}
             </button>
-            <button onClick={() => handleEditTodo(index)}>Edit</button>
-            <button
-              onClick={() => handleDeleteTodo(index)}
-              style={{
-                marginLeft: "10px",
-                padding: "5px",
-                backgroundColor: "#f44336",
-                color: "black",
-                border: "none",
-                cursor: "pointer",
-                borderRadius:"5px"
-              }}
-            >
-              Delete
-            </button>
+            <button onClick={() => handleEditTodo(index)} style={{margin: "1rem"}}>Edit</button>
+            {editTodo !== null ? (
+              ""
+            ) : (
+              <button
+                onClick={() => handleDeleteTodo(index)}
+                style={{
+                  marginLeft: "10px",
+                  padding: "5px",
+                  backgroundColor: "#f44336",
+                  color: "black",
+                  border: "none",
+                  cursor: "pointer",
+                  borderRadius: "5px",
+                }}
+              >
+                Delete
+              </button>
+            )}
           </li>
         ))}
       </ul>
-      {editTodo === null ? (
-    ""
-) : (
-    <button onClick={handleSaveTodo}>Save</button>
-)}
+      {editTodo === null ? "" : <button onClick={handleSaveTodo}>Save</button>}
     </div>
   );
 }
