@@ -1,11 +1,11 @@
 import { useState } from "react";
 
 function App() {
-  const [todos, setTodos] = useState([]);
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [done, setDone] = useState(false);
-  const [editTodo, setEditTodo] = useState(null);
+  const [todos, setTodos] = useState([]); // State for storing todos
+  const [title, setTitle] = useState(""); // State for storing todo title
+  const [description, setDescription] = useState(""); // State for storing todo description
+  const [done, setDone] = useState(false); // State for storing todo completion status
+  const [editTodo, setEditTodo] = useState(null); // State for storing the index of the todo being edited
 
   const handleAddTodo = () => {
     if (title.trim() !== "" && description.trim() !== "") {
@@ -14,33 +14,37 @@ function App() {
         description: description,
         done: done,
       };
-      setTodos([...todos, newTodo]);
-      setTitle("");
-      setDescription("");
-      setDone(false);
+      setTodos([...todos, newTodo]); // Add new todo to the todos array
+      setTitle(""); // Clear the title input field
+      setDescription(""); // Clear the description input field
+      setDone(false); // Reset the completion status
     }
   };
+
   const handleSaveTodo = () => {
     const newTodos = [...todos];
     newTodos[editTodo] = { title, description, done: todos[editTodo].done };
-    setTodos(newTodos);
-    setTitle("");
-    setDescription("");
-    setEditTodo(null);
+    setTodos(newTodos); // Update the todos array with the edited todo
+    setTitle(""); // Clear the title input field
+    setDescription(""); // Clear the description input field
+    setEditTodo(null); // Reset the editTodo state
   };
+
   const handleDeleteTodo = (index) => {
-    const updatedTodos = todos.filter((_, i) => i !== index);
-    setTodos(updatedTodos);
+    const updatedTodos = todos.filter((_, i) => i !== index); // Remove the todo at the specified index
+    setTodos(updatedTodos); // Update the todos array
   };
+
   const handleToggleDone = (index) => {
     const newTodos = [...todos];
-    newTodos[index].done = !newTodos[index].done;
-    setTodos(newTodos);
+    newTodos[index].done = !newTodos[index].done; // Toggle the completion status of the todo at the specified index
+    setTodos(newTodos); // Update the todos array
   };
+
   const handleEditTodo = (index) => {
-    setEditTodo(index);
-    setTitle(todos[index].title);
-    setDescription(todos[index].description);
+    setEditTodo(index); // Set the index of the todo being edited
+    setTitle(todos[index].title); // Set the title input field value to the title of the todo being edited
+    setDescription(todos[index].description); // Set the description input field value to the description of the todo being edited
   };
 
   return (
@@ -117,10 +121,9 @@ function App() {
                 textDecoration: todo.done ? "line-through" : "none",
                 color: "black",
                 flex: "1 1 auto",
-             
               }}
             >
-              <b>{todo.title}</b> <br/> {todo.description}
+              <b>{todo.title}</b> <br /> {todo.description}
             </span>
             <div style={{ display: "flex", gap: "10px" }}>
               <button
